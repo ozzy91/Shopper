@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -24,4 +24,20 @@ dependencies {
     // The Support Repository (separate from the corresponding library) can be found in the Extras category.
     // compile 'com.android.support:support-v4:19.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+repositories {
+    // Reference the local Maven repository
+    mavenLocal()
+}
+
+dependencies {
+    compile ('com.google.http-client:google-http-client-android:1.18.0-rc') {
+        exclude (group: 'com.google.android', module: 'android')
+        exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
+
+    compile ('com.ostfeld.shopper.backend:myApi:v1-1.18.0-rc-SNAPSHOT') {
+        exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
+    }
 }

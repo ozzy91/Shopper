@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="myApi-v1-1.18.0-rc-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/ostfeld/shopper/backend/myApi/v1-1.18.0-rc-SNAPSHOT/myApi-v1-1.18.0-rc-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/ostfeld/shopper/backend/myApi/v1-1.18.0-rc-SNAPSHOT/myApi-v1-1.18.0-rc-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
