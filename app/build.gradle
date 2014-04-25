@@ -37,7 +37,7 @@ dependencies {
         exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
     }
 
-    compile ('com.ostfeld.shopper.backend:myApi:v1-1.18.0-rc-SNAPSHOT') {
+    compile ('com.ostfeld.shopper.backend:listApi:v1-1.18.0-rc-SNAPSHOT') {
         exclude (group: 'org.apache.httpcomponents', module: 'httpclient')
     }
 }

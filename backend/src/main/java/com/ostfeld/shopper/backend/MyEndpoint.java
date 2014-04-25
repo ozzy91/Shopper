@@ -11,13 +11,13 @@ import java.util.List;
 import javax.inject.Named;
 
 /** An endpoint class we are exposing */
-@Api(name = "myApi", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.shopper.ostfeld.com", ownerName = "backend.shopper.ostfeld.com", packagePath=""))
+@Api(name = "listApi", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.shopper.ostfeld.com", ownerName = "backend.shopper.ostfeld.com", packagePath=""))
 public class MyEndpoint {
 
     public static List<ListItem> items = new ArrayList<ListItem>();
 
     @ApiMethod(name = "add")
-    public ListItem addItem(@Named("id") int id, @Named("title") String title) throws NotFoundException {
+    public ListItem addItem(@Named("id") long id, @Named("title") String title) throws NotFoundException {
         if (items.contains(new ListItem(id))) {
             throw new NotFoundException("ListItem with this ID already exists.");
         }
@@ -28,7 +28,7 @@ public class MyEndpoint {
     }
 
     @ApiMethod(name = "remove")
-    public void removeItem(@Named("id") int id) throws NotFoundException {
+    public void removeItem(@Named("id") long id) throws NotFoundException {
         int index = items.indexOf(new ListItem(id));
         if (index == -1) {
             throw new NotFoundException("ListItem does not exists.");
@@ -37,7 +37,7 @@ public class MyEndpoint {
     }
 
     @ApiMethod(name = "update")
-    public ListItem setItemChecked(@Named("id") int id, @Named("checked") boolean checked) throws NotFoundException {
+    public ListItem setItemChecked(@Named("id") long id, @Named("checked") boolean checked) throws NotFoundException {
         int index = items.indexOf(new ListItem(id));
         if (index == -1) {
             throw new NotFoundException("ListItem does not exists.");

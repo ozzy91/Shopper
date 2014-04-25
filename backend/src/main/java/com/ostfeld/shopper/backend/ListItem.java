@@ -3,15 +3,15 @@ package com.ostfeld.shopper.backend;
 /** The object model for the data we are sending through endpoints */
 public class ListItem {
 
-    private Integer id;
+    private long id;
     private String title;
     private boolean checked;
 
-    public ListItem(int id) {
+    public ListItem(long id) {
         this.id = id;
     }
 
-    public ListItem(int id, String title) {
+    public ListItem(long id, String title) {
         this.id = id;
         this.title = title;
     }
@@ -24,11 +24,11 @@ public class ListItem {
         title = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -44,7 +44,7 @@ public class ListItem {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((id == 0) ? 0 : (int) (Math.random() * 100000));
         return result;
     }
 
@@ -57,10 +57,10 @@ public class ListItem {
         if (getClass() != obj.getClass())
             return false;
         ListItem other = (ListItem) obj;
-        if (id == null) {
-            if (other.id != null)
+        if (id == 0) {
+            if (other.id != 0)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (id != other.id)
             return false;
         return true;
     }

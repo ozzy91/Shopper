@@ -7,19 +7,30 @@ import java.io.Serializable;
  */
 public class Item implements Serializable {
 
+    private long id;
     private String title;
     private String description;
     private boolean checked;
 
-    public Item(String title) {
+    public Item(long id, String title) {
+        this.id = id;
         this.title = title;
         this.checked = false;
     }
 
-    public Item(String title, String description) {
+    public Item(long id, String title, String description) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.checked = false;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
