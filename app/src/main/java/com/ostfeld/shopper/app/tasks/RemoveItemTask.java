@@ -20,14 +20,14 @@ public class RemoveItemTask extends AsyncTask<Item, Void, Void> {
     private ListApi listApiService;
 
     public RemoveItemTask() {
-        ListApi.Builder builder = new ListApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                .setRootUrl(DataManager.SERVER_ADDRESS + DataManager.API_ADDRESS)
-                .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-                    @Override
-                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
-                        abstractGoogleClientRequest.setDisableGZipContent(true);
-                    }
-                });
+        ListApi.Builder builder = new ListApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null);
+//                .setRootUrl(DataManager.SERVER_ADDRESS + DataManager.API_ADDRESS)
+//                .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+//                    @Override
+//                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+//                        abstractGoogleClientRequest.setDisableGZipContent(true);
+//                    }
+//                });
 
         listApiService = builder.build();
     }

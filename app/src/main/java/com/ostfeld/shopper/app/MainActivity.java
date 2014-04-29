@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ProgressBar;
 
 import com.ostfeld.shopper.app.fragments.ShoppingListFragment;
 import com.ostfeld.shopper.app.model.Item;
@@ -21,19 +22,21 @@ import com.ostfeld.shopper.app.tasks.GetItemsTask;
 
 public class MainActivity extends Activity implements ShoppingListFragment.OnListFragmentInteractionListener {
 
+    private ShoppingListFragment listFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            ShoppingListFragment fragment = ShoppingListFragment.newInstance();
-            fragment.setShoppingList(createTestList());
+            listFragment = ShoppingListFragment.newInstance();
+//            fragment.setShoppingList(createTestList());
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, fragment, ShoppingListFragment.TAG)
+                    .add(R.id.container, listFragment, ShoppingListFragment.TAG)
                     .commit();
+        } else {
+            listFragment = (ShoppingListFragment) getFragmentManager().findFragmentByTag(ShoppingListFragment.TAG);
         }
-
-        new AddItemTask().execute(new Item(3, "Milch"));
     }
 
 
@@ -51,8 +54,11 @@ public class MainActivity extends Activity implements ShoppingListFragment.OnLis
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            new GetItemsTask().execute();
+        if (id == R.id.action_refresh) {
+            if (listFragment != null) {
+                item.setActionView(R.layout.viw_action_bar_loading);
+                listFragment.refresh();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -8,6 +8,7 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.ostfeld.shopper.app.DataManager;
+import com.ostfeld.shopper.app.interfaces.ListManager;
 import com.ostfeld.shopper.backend.listApi.ListApi;
 import com.ostfeld.shopper.backend.listApi.model.ListItem;
 
@@ -20,18 +21,21 @@ import java.util.List;
 public class GetItemsTask extends AsyncTask<Void, Void, List<ListItem>> {
 
     private ListApi listApiService;
+    private ListManager listManager;
 
-    public GetItemsTask() {
-        ListApi.Builder builder = new ListApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-                .setRootUrl(DataManager.SERVER_ADDRESS + DataManager.API_ADDRESS)
-                .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-                    @Override
-                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
-                        abstractGoogleClientRequest.setDisableGZipContent(true);
-                    }
-                });
+    public GetItemsTask(ListManager listManager) {
+        ListApi.Builder builder = new ListApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null);
+//                .setRootUrl(DataManager.SERVER_ADDRESS + DataManager.API_ADDRESS)
+//                .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+//                    @Override
+//                    public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+//                        abstractGoogleClientRequest.setDisableGZipContent(true);
+//                    }
+//                });
 
         listApiService = builder.build();
+
+        this.listManager = listManager;
     }
 
     @Override
@@ -48,6 +52,9 @@ public class GetItemsTask extends AsyncTask<Void, Void, List<ListItem>> {
     @Override
     protected void onPostExecute(List<ListItem> listItems) {
         super.onPostExecute(listItems);
-        Log.e("", "num of items: " + listItems.size());
+
+        if (listManager != null) {
+            listManager.receiveList(listItems);
+        }
     }
 }

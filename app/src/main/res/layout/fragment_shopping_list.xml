@@ -9,7 +9,7 @@
         android:id="@+id/txt_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titel"
+        android:text="Einkaufsliste"
         android:textSize="30sp"
         android:fontFamily="sans-serif-light"/>
 
@@ -22,10 +22,43 @@
         android:layout_marginBottom="4dp"
         android:background="#aaaaaa"/>
 
+    <LinearLayout
+        android:id="@+id/lay_add_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:id="@+id/edit_text_item_name"
+            android:imeOptions="actionDone"
+            android:nextFocusUp="@id/edit_text_item_name"
+            android:nextFocusLeft="@id/edit_text_item_name"
+            android:hint="@string/hint_new_entry"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add"
+            android:padding="4dp"
+            android:src="@drawable/ic_add"
+            android:background="@android:color/transparent" />
+
+        </LinearLayout>
+
     <ListView
         android:id="@+id/list_shopping"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/viw_separator"/>
+        android:layout_below="@id/viw_separator"
+        android:layout_above="@id/lay_add_item"
+        android:layout_marginBottom="4dp"
+        android:listSelector="@android:color/transparent"/>
 
 </RelativeLayout>
