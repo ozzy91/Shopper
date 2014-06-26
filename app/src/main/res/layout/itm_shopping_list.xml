@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingLeft="8dp"
     android:paddingTop="4dp"
-    android:paddingRight="8dp"
+    android:paddingRight="4dp"
     android:paddingBottom="4dp"
     android:descendantFocusability="blocksDescendants" >
 
@@ -22,7 +22,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/viw_item_checkbox"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:paddingLeft="4dp"
+        android:paddingTop="2dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="2dp"/>
 
     <ImageButton
         android:layout_width="wrap_content"

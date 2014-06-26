@@ -1,6 +1,7 @@
 package com.ostfeld.shopper.app.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -43,22 +44,24 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ListItemView view = (ListItemView) convertView;
-        if (view == null) {
- //           convertView = View.inflate(context, resourceId, null);
-            view = new ListItemView(getContext());
+        ListItemView tmpView = (ListItemView) convertView;
+        if (tmpView == null) {
+            tmpView = new ListItemView(getContext());
             ViewHolder holder = new ViewHolder();
-            holder.title = (TextView) view.findViewById(R.id.txt_item_title);
-            holder.checkBox = (CheckBox) view.findViewById(R.id.viw_item_checkbox);
-            holder.btnDelete = (ImageButton) view.findViewById(R.id.btn_delete);
-            holder.btnEdit = (ImageButton) view.findViewById(R.id.btn_edit);
-            view.setTag(holder);
+            holder.title = (TextView) tmpView.findViewById(R.id.txt_item_title);
+            holder.checkBox = (CheckBox) tmpView.findViewById(R.id.viw_item_checkbox);
+            holder.btnDelete = (ImageButton) tmpView.findViewById(R.id.btn_delete);
+            holder.btnEdit = (ImageButton) tmpView.findViewById(R.id.btn_edit);
+            tmpView.setTag(holder);
         }
 
+        final ListItemView itemView = tmpView;
+
         final Item item = shoppingList.getItems().get(position);
-        final ViewHolder holder = (ViewHolder) view.getTag();
+        final ViewHolder holder = (ViewHolder) itemView.getTag();
         holder.title.setText(item.getTitle());
         holder.checkBox.setChecked(item.isChecked());
+        itemView.setChecked(item.isChecked());
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -68,6 +71,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
                         boolean checked = ((CheckBox) view).isChecked();
                         item.setChecked(checked);
                         new SetCheckedTask().execute(item);
+                        itemView.setChecked(checked);
                         break;
                     case R.id.btn_delete:
                         shoppingList.getItems().remove(shoppingList.getItems().indexOf(item));
@@ -87,7 +91,7 @@ public class ShoppingListAdapter extends ArrayAdapter<Item> {
         holder.btnDelete.setOnClickListener(clickListener);
         holder.btnEdit.setOnClickListener(clickListener);
 
-        return view;
+        return tmpView;
     }
 
     public void setShoppingList(ShoppingList list) {

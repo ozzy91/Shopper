@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class ShoppingListFragment extends Fragment implements View.OnClickListen
     private ShoppingList shoppingList;
     private ShoppingListAdapter adapter;
 
+    private ProgressBar pgbLoading;
     private ListView listView;
     private TextView txtTitle;
     private EditText editName;
@@ -80,6 +82,7 @@ public class ShoppingListFragment extends Fragment implements View.OnClickListen
         txtTitle = (TextView) fragmentView.findViewById(R.id.txt_list_title);
         editName = (EditText) fragmentView.findViewById(R.id.edit_text_item_name);
         btnAdd = (ImageButton) fragmentView.findViewById(R.id.btn_add);
+        pgbLoading = (ProgressBar) fragmentView.findViewById(R.id.pgb_loading);
 
         adapter = new ShoppingListAdapter(getActivity(), R.layout.itm_shopping_list);
         listView.setAdapter(adapter);
@@ -146,6 +149,8 @@ public class ShoppingListFragment extends Fragment implements View.OnClickListen
 
         editName.setText("");
 
+        listView.setSelection(adapter.getCount() - 1);
+
         new AddItemTask().execute(item);
     }
 
@@ -163,6 +168,7 @@ public class ShoppingListFragment extends Fragment implements View.OnClickListen
             convertedItem.setChecked(item.getChecked());
             list.addItem(convertedItem);
         }
+        pgbLoading.setVisibility(View.GONE);
         setShoppingList(list);
         getActivity().invalidateOptionsMenu();
     }

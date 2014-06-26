@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ostfeld.shopper.app.R;
 
@@ -22,6 +23,7 @@ public class ListItemView extends RelativeLayout {
 
     private ImageButton btnDelete;
     private ImageButton btnEdit;
+    private TextView txtTitle;
 
     private AnimatorSet fadeIn;
     private AnimatorSet fadeOut;
@@ -49,6 +51,7 @@ public class ListItemView extends RelativeLayout {
 
         btnDelete = (ImageButton) findViewById(R.id.btn_delete);
         btnEdit = (ImageButton) findViewById(R.id.btn_edit);
+        txtTitle = (TextView) findViewById(R.id.txt_item_title);
 
         ObjectAnimator animDeleteIn = ObjectAnimator.ofFloat(btnDelete, "alpha", 1f);
         ObjectAnimator animEditIn = ObjectAnimator.ofFloat(btnEdit, "alpha", 1f);
@@ -88,6 +91,14 @@ public class ListItemView extends RelativeLayout {
             fadeIn.start();
             isButtonsVisible = true;
             postDelayed(fadeOutRunnable, 3000);
+        }
+    }
+
+    public void setChecked(boolean checked) {
+        if (checked) {
+            txtTitle.setTextColor(Color.parseColor("#aaaaaa"));
+        } else {
+            txtTitle.setTextColor(Color.BLACK);
         }
     }
 
